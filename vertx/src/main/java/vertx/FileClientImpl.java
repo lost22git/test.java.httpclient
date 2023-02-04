@@ -16,14 +16,15 @@ import io.vertx.uritemplate.UriTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 
 public class FileClientImpl implements FileClient {
     private final WebClient webClient;
 
     public FileClientImpl(Vertx vertx) {
         var proxyOptions = new ProxyOptions()
-            .setHost(proxy_addr.getHostName())
-            .setPort(proxy_addr.getPort())
+            .setHost(((InetSocketAddress) proxy.address()).getHostName())
+            .setPort(((InetSocketAddress) proxy.address()).getPort())
             .setType(ProxyType.SOCKS5);
         var options = new WebClientOptions()
             .setDefaultHost(addr.getHost())

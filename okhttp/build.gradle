@@ -1,0 +1,5 @@
+dependencies {
+  implementation(projects.common)
+  implementation(libs.retrofit)
+  implementation(libs.retrofit.converter.jackson)
+}

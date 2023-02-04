@@ -1,32 +1,33 @@
-package avaje;
+package okhttp;
 
 import common.mail.MailClient;
-import io.avaje.http.client.HttpClient;
-import io.avaje.http.client.JacksonBodyAdapter;
+import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MailClientExtTest {
 
     private static MailClient mailClient;
+
     private static String mail;
 
     @BeforeAll
     static void setup() {
-        var proxySelector = ProxySelector.of((InetSocketAddress) MailClient.proxy.address());
-        var httpclient = HttpClient.builder()
+        var httpClient = new OkHttpClient.Builder()
+//            .proxy(FileClient.proxy)
+            .build();
+        var retrofit = new Retrofit.Builder()
             .baseUrl(MailClient.addr.toString())
-//            .proxy(proxySelector)
-            .bodyAdapter(new JacksonBodyAdapter())
+            .addConverterFactory(JacksonConverterFactory.create())
+            .client(httpClient)
             .build();
 
-        mailClient = httpclient.create(MailClientExt.class);
-        mail = "avaje@end.tw";
+        mailClient = retrofit.create(MailClientExt.class);
+        mail = "ok@end.tw";
     }
 
     @Test
@@ -58,5 +59,6 @@ class MailClientExtTest {
             System.out.println("msgDetails.text = " + msgDetails.text());
         });
     }
+
 
 }

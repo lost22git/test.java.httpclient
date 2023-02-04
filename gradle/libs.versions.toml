@@ -20,6 +20,9 @@ vertx = "4.3.7"
 # helidon
 helidon = "4.0.0-ALPHA4"
 
+# okhttp
+retrofit = "2.9.0"
+
 ####################### Plugins version
 plugin-taskinfo = "1.4.0"
 plugin-goJF = "0.9"
@@ -121,6 +124,14 @@ version.ref = "helidon"
 [libraries.helidon-nima-http-media-multipart]
 module = "io.helidon.nima.http.media:helidon-nima-http-media-multipart"
 version.ref = "helidon"
+
+# okhttp
+[libraries.retrofit]
+module = "com.squareup.retrofit2:retrofit"
+version.ref = "retrofit"
+[libraries.retrofit-converter-jackson]
+module  = "com.squareup.retrofit2:converter-jackson"
+version.ref = "retrofit"
 
 ####################### Plugins
 [plugins.taskinfo]

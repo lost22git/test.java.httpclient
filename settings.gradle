@@ -12,4 +12,5 @@ include 'avaje'
 include 'vertx'
 include 'common'
 include 'helidon-nima'
+include 'okhttp'
 

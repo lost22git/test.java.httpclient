@@ -9,7 +9,6 @@ import io.helidon.nima.http.media.multipart.WriteableMultiPart;
 import io.helidon.nima.http.media.multipart.WriteablePart;
 import io.helidon.nima.webclient.http1.Http1Client;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class FileClientImpl implements FileClient {
@@ -18,12 +17,12 @@ public class FileClientImpl implements FileClient {
 
     public FileClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(addr.toString() + ":443")
+            .baseUri(addr + ":443")
             .build();
     }
 
     @Override
-    public UploadResponse upload(InputStream inputStream) throws IOException {
+    public UploadResponse upload(InputStream inputStream) {
         var multipart = WriteableMultiPart.builder()
             .addPart(WriteablePart.builder("file")
                 .fileName("test.png")

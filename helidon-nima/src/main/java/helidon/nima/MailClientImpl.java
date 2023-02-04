@@ -17,7 +17,7 @@ public class MailClientImpl implements MailClient {
 
     public MailClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(addr.toString() + ":443")
+            .baseUri(addr + ":443")
             .build();
     }
 
@@ -50,7 +50,7 @@ public class MailClientImpl implements MailClient {
 
         var stream = res.entity().inputStream();
         try {
-            return JacksonSupportProvider.JSON.readValue(stream, new TypeReference<List<MailMsg>>() {
+            return JacksonSupportProvider.JSON.readValue(stream, new TypeReference<>() {
             });
         } catch (IOException e) {
             throw new RuntimeException(e);

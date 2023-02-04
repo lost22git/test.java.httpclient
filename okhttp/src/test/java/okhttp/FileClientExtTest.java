@@ -1,14 +1,13 @@
-package avaje;
+package okhttp;
 
 import common.file.FileClient;
-import io.avaje.http.client.HttpClient;
-import io.avaje.http.client.JacksonBodyAdapter;
+import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,23 +18,21 @@ class FileClientExtTest {
 
     @BeforeAll
     static void setup() {
-
-        var proxySelector = ProxySelector.of((InetSocketAddress) FileClient.proxy.address());
-
-        var httpClient = HttpClient.builder()
-            .proxy(proxySelector)
+        var httpClient = new OkHttpClient.Builder()
+            .proxy(FileClient.proxy)
+            .build();
+        var retrofit = new Retrofit.Builder()
             .baseUrl(FileClient.addr.toString())
-            .bodyAdapter(new JacksonBodyAdapter())
+            .addConverterFactory(JacksonConverterFactory.create())
+            .client(httpClient)
             .build();
 
-        fileClient = httpClient.create(FileClientExt.class);
+        fileClient = retrofit.create(FileClientExt.class);
     }
 
-
-    // TODO avaje does not support multipart now
     @Test
     void upload() throws IOException {
-        var to_upload_url = FileClientExtTest.class.getClassLoader().getResource("to_upload.png");
+        var to_upload_url = FileClientExtTest.class.getClassLoader().getResource("test.png");
 
         assertNotNull(to_upload_url);
 
@@ -61,5 +58,4 @@ class FileClientExtTest {
         assertNotNull(infoResponse.data().file().url().full());
         assertNotNull(infoResponse.data().file().metadata().id());
     }
-
 }

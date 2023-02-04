@@ -14,6 +14,7 @@ import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.codec.BodyCodec;
 import io.vertx.uritemplate.UriTemplate;
 
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class MailClientImpl implements MailClient {
 
     public MailClientImpl(Vertx vertx) {
         var proxyOptions = new ProxyOptions()
-            .setHost(proxy_addr.getHostName())
-            .setPort(proxy_addr.getPort())
+            .setHost(((InetSocketAddress) proxy.address()).getHostName())
+            .setPort(((InetSocketAddress) proxy.address()).getPort())
             .setType(ProxyType.SOCKS5);
 
         var options = new WebClientOptions()
