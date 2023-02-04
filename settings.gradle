@@ -1,0 +1,15 @@
+pluginManagement {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "root"
+include 'avaje'
+include 'vertx'
+include 'common'
+include 'helidon-nima'
+

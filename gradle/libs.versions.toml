@@ -1,0 +1,150 @@
+[versions]
+####################### Libraries version
+jetbrains-annotations = "23.0.0"
+slf4j = "2.0.0"
+logback = "1.4.5"
+logstash-logback-encoder = "7.2"
+junit = "5.9.0"
+jmh = "1.35"
+assertj = "3.23.1"
+awaitility = "4.2.0"
+easyrandom = "5.0.0"
+jackson = "2.13.4"
+
+
+# avaje
+avaje-http-client = "1.24"
+avaje-slf4j-jpl = "1.2"
+# vertx
+vertx = "4.3.7"
+# helidon
+helidon = "4.0.0-ALPHA4"
+
+####################### Plugins version
+plugin-taskinfo = "1.4.0"
+plugin-goJF = "0.9"
+plugin-jmh = "0.6.6"
+plugin-jmhReport = "0.9.0"
+plugin-jcstress = "0.8.11"
+plugin-shadow = "7.1.2"
+
+
+####################### Bundles
+[bundles]
+junit = ["junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"]
+jmh = ["jmh-core", "jmh-generator-annprocess"]
+jackson = ["jackson-annotations", "jackson-jsr310"]
+
+
+####################### Libraries
+[libraries.jetbrains-annotations]
+module = "org.jetbrains:annotations"
+version.ref = "jetbrains-annotations"
+
+[libraries.slf4j]
+module = "org.slf4j:slf4j-api"
+version.ref = "slf4j"
+
+[libraries.logback]
+module = "ch.qos.logback:logback-classic"
+version.ref = "logback"
+
+[libraries.logstash-logback-encoder]
+module = "net.logstash.logback:logstash-logback-encoder"
+version.ref = "logstash-logback-encoder"
+
+[libraries.junit-jupiter-api]
+module = "org.junit.jupiter:junit-jupiter-api"
+version.ref = "junit"
+
+[libraries.junit-jupiter-engine]
+module = "org.junit.jupiter:junit-jupiter-engine"
+version.ref = "junit"
+
+[libraries.junit-jupiter-params]
+module = "org.junit.jupiter:junit-jupiter-params"
+version.ref = "junit"
+
+[libraries.jmh-core]
+module = "org.openjdk.jmh:jmh-core"
+version.ref = "jmh"
+
+[libraries.jmh-generator-annprocess]
+module = "org.openjdk.jmh:jmh-generator-annprocess"
+version.ref = "jmh"
+
+[libraries.assertj]
+module = "org.assertj:assertj-core"
+version.ref = "assertj"
+
+[libraries.awaitility]
+module = "org.awaitility:awaitility"
+version.ref = "awaitility"
+
+[libraries.easyrandom-core]
+module = "org.jeasy:easy-random-core"
+version.ref = "easyrandom"
+
+[libraries.jackson-annotations]
+module = "com.fasterxml.jackson.core:jackson-annotations"
+version.ref = "jackson"
+
+[libraries.jackson-jsr310]
+module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+version.ref = "jackson"
+
+
+# avaje
+[libraries.avaje-http-client]
+module = "io.avaje:avaje-http-client"
+version.ref = "avaje-http-client"
+
+[libraries.avaje-http-api]
+module = "io.avaje:avaje-http-api"
+version.ref = "avaje-http-client"
+[libraries.avaje-http-client-generator]
+module = "io.avaje:avaje-http-client-generator"
+version.ref = "avaje-http-client"
+[libraries.avaje-slf4j-jpl]
+module = "io.avaje:avaje-slf4j-jpl"
+version.ref = "avaje-slf4j-jpl"
+
+# vetx
+[libraries.vertx-web-client]
+module = "io.vertx:vertx-web-client"
+version.ref = "vertx"
+
+# helidon
+[libraries.helidon-nima-webclient]
+module = "io.helidon.nima.webclient:helidon-nima-webclient"
+version.ref = "helidon"
+[libraries.helidon-nima-http-media-multipart]
+module = "io.helidon.nima.http.media:helidon-nima-http-media-multipart"
+version.ref = "helidon"
+
+####################### Plugins
+[plugins.taskinfo]
+id = "org.barfuin.gradle.taskinfo"
+version.ref = "plugin-taskinfo"
+
+[plugins.goJF]
+id = "com.github.sherter.google-java-format"
+version.ref = "plugin-goJF"
+
+[plugins.jmh]
+id = "me.champeau.jmh"
+version.ref = "plugin-jmh"
+
+[plugins.jmhReport]
+id = "io.morethan.jmhreport"
+version.ref = "plugin-jmhReport"
+
+[plugins.jcstress]
+id = "io.github.reyerizo.gradle.jcstress"
+version.ref = "plugin-jcstress"
+
+[plugins.shadow]
+id = "com.github.johnrengelman.shadow"
+version.ref = "plugin-shadow"
+
+[metadata]

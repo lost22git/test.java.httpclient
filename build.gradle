@@ -1,0 +1,55 @@
+plugins {
+  id("groovy")
+}
+
+
+allprojects {
+  group = "test.java.client"
+  version = "1.0.0"
+
+  repositories {
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/repository/public" }
+    mavenCentral()
+  }
+
+}
+
+subprojects {
+
+  apply {
+    plugin("groovy")
+  }
+
+  java {
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+  }
+
+  dependencies {
+    // annotation
+    compileOnly(libs.jetbrains.annotations)
+    // log
+    implementation(libs.slf4j)
+    // test
+    testCompileOnly(libs.jetbrains.annotations)
+    testImplementation(libs.logback)
+    testImplementation(libs.bundles.junit)
+    testImplementation(libs.assertj)
+    testImplementation(libs.awaitility)
+    testImplementation(libs.easyrandom.core)
+  }
+
+
+  // ------ Tasks
+  tasks.compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-parameters")
+    // use the project's version or define one directly
+    options.javaModuleVersion = provider { project.version }
+  }
+  tasks.test {
+    useJUnitPlatform()
+  }
+
+}

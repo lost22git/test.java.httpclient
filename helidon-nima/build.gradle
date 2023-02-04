@@ -1,0 +1,22 @@
+dependencies {
+  implementation(projects.common)
+  implementation(libs.helidon.nima.webclient)
+  implementation(libs.helidon.nima.http.media.multipart)
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs.add("--enable-preview")
+}
+
+tasks.withType(JavaExec).configureEach {
+  applicationDefaultJvmArgs = [
+    "--enable-preview"
+  ]
+}
+
+
+tasks.withType(Test).configureEach {
+  jvmArgs("--enable-preview")
+}
+

@@ -1,0 +1,9 @@
+
+dependencies {
+  implementation(projects.common)
+  implementation(libs.logback)
+  implementation(libs.avaje.slf4j.jpl)
+  implementation(libs.avaje.http.client)
+  implementation(libs.avaje.http.api)
+  annotationProcessor(libs.avaje.http.client.generator)
+}
