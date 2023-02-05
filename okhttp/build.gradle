@@ -1,5 +1,7 @@
 dependencies {
   implementation(projects.common)
+  implementation(libs.logback)
+  implementation(libs.okhttp.logging)
   implementation(libs.retrofit)
   implementation(libs.retrofit.converter.jackson)
 }

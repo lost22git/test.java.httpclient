@@ -11,9 +11,6 @@ import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * https://mail.td
- */
 @Client
 public interface MailClientExt extends MailClient {
 

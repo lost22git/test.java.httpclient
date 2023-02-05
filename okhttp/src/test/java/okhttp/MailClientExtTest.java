@@ -2,6 +2,7 @@ package okhttp;
 
 import common.mail.MailClient;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import retrofit2.Retrofit;
@@ -19,6 +20,7 @@ class MailClientExtTest {
     static void setup() {
         var httpClient = new OkHttpClient.Builder()
 //            .proxy(FileClient.proxy)
+            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
         var retrofit = new Retrofit.Builder()
             .baseUrl(MailClient.addr.toString())

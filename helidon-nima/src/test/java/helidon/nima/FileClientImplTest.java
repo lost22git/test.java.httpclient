@@ -33,7 +33,7 @@ class FileClientImplTest {
 
 
     @Test
-    void test_info() {
+    void info() {
         var id = "WeZdKcVeyb";
 
         var infoResponse = fileClient.info(id);

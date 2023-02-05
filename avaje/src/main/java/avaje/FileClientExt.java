@@ -18,7 +18,6 @@ public interface FileClientExt extends FileClient {
         return upload(HttpRequest.BodyPublishers.ofInputStream(() -> inputStream));
     }
 
-
     // TODO avaje does not support multipart now
     @Post("/upload")
     UploadResponse upload(HttpRequest.BodyPublisher bodyPublisher);
