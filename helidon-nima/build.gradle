@@ -1,7 +1,12 @@
 dependencies {
   implementation(projects.common)
+  // http client
   implementation(libs.helidon.nima.webclient)
   implementation(libs.helidon.nima.http.media.multipart)
+  // inject
+  implementation(libs.avaje.inject)
+  annotationProcessor(libs.avaje.inject.generator)
+  testImplementation(libs.avaje.inject.test)
 }
 
 

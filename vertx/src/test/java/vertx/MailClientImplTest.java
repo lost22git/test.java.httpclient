@@ -1,21 +1,21 @@
 package vertx;
 
 import common.mail.MailClient;
-import io.vertx.core.Vertx;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@InjectTest
 class MailClientImplTest {
+    @Inject
     private static MailClient mailClient;
     private static String mail;
 
     @BeforeAll
     static void setup() {
-        Vertx vertx = Vertx.vertx();
-        mailClient = new MailClientImpl(vertx);
-
         mail = "vertx@end.tw";
     }
 

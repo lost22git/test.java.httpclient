@@ -1,7 +1,8 @@
 package helidon.nima;
 
 import common.file.FileClient;
-import org.junit.jupiter.api.BeforeAll;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,14 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@InjectTest
 class FileClientImplTest {
 
+    @Inject
     private static FileClient fileClient;
-
-    @BeforeAll
-    static void setup() {
-        fileClient = new FileClientImpl();
-    }
 
     @Test
     void upload() throws IOException {

@@ -8,9 +8,11 @@ import io.helidon.common.http.HttpMediaType;
 import io.helidon.nima.http.media.multipart.WriteableMultiPart;
 import io.helidon.nima.http.media.multipart.WriteablePart;
 import io.helidon.nima.webclient.http1.Http1Client;
+import jakarta.inject.Singleton;
 
 import java.io.InputStream;
 
+@Singleton
 public class FileClientImpl implements FileClient {
 
     private final Http1Client httpClient;

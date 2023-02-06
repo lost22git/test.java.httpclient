@@ -13,11 +13,13 @@ import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.codec.BodyCodec;
 import io.vertx.ext.web.multipart.MultipartForm;
 import io.vertx.uritemplate.UriTemplate;
+import jakarta.inject.Singleton;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 
+@Singleton
 public class FileClientImpl implements FileClient {
     private final WebClient webClient;
 

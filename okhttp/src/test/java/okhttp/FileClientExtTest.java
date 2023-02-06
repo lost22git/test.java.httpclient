@@ -1,35 +1,25 @@
 package okhttp;
 
 import common.file.FileClient;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@InjectTest
 class FileClientExtTest {
 
+    @Inject
     private static FileClient fileClient;
 
     @BeforeAll
     static void setup() {
-        var httpClient = new OkHttpClient.Builder()
-            .proxy(FileClient.proxy)
-            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build();
-        var retrofit = new Retrofit.Builder()
-            .baseUrl(FileClient.addr.toString())
-            .addConverterFactory(JacksonConverterFactory.create())
-            .client(httpClient)
-            .build();
 
-        fileClient = retrofit.create(FileClientExt.class);
     }
 
     @Test

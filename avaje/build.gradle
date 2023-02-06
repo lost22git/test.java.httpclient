@@ -1,9 +1,14 @@
-
 dependencies {
   implementation(projects.common)
+  // log
   implementation(libs.logback)
   implementation(libs.avaje.slf4j.jpl)
+  // http client
   implementation(libs.avaje.http.client)
   implementation(libs.avaje.http.api)
   annotationProcessor(libs.avaje.http.client.generator)
+  // inject
+  implementation(libs.avaje.inject)
+  annotationProcessor(libs.avaje.inject.generator)
+  testImplementation(libs.avaje.inject.test)
 }

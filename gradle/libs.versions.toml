@@ -11,8 +11,10 @@ awaitility = "4.2.0"
 easyrandom = "5.0.0"
 jackson = "2.13.4"
 
+# avaje-inject
+avaje-inject = "8.11"
 
-# avaje
+# avaje-httpclient
 avaje-http-client = "1.24"
 avaje-slf4j-jpl = "1.2"
 # vertx
@@ -97,12 +99,21 @@ version.ref = "jackson"
 module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 version.ref = "jackson"
 
+# avaje-inject
+[libraries.avaje-inject]
+module = "io.avaje:avaje-inject"
+version.ref = "avaje-inject"
+[libraries.avaje-inject-generator]
+module = "io.avaje:avaje-inject-generator"
+version.ref = "avaje-inject"
+[libraries.avaje-inject-test]
+module = "io.avaje:avaje-inject-test"
+version.ref = "avaje-inject"
 
-# avaje
+# avaje-htto-client
 [libraries.avaje-http-client]
 module = "io.avaje:avaje-http-client"
 version.ref = "avaje-http-client"
-
 [libraries.avaje-http-api]
 module = "io.avaje:avaje-http-api"
 version.ref = "avaje-http-client"

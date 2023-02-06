@@ -1,20 +1,23 @@
 package helidon.nima;
 
 import common.mail.MailClient;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@InjectTest
 class MailClientImplTest {
 
+    @Inject
     private static MailClient mailClient;
     private static String mail;
 
     @BeforeAll
     static void setup() {
-        mailClient = new MailClientImpl();
         mail = "nima@end.tw";
     }
 

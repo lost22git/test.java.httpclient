@@ -1,8 +1,8 @@
 package vertx;
 
 import common.file.FileClient;
-import io.vertx.core.Vertx;
-import org.junit.jupiter.api.BeforeAll;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,15 +10,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@InjectTest
 class FileClientImplTest {
 
+    @Inject
     private static FileClient fileClient;
-
-    @BeforeAll
-    static void setup() {
-        var vertx = Vertx.vertx();
-        fileClient = new FileClientImpl(vertx);
-    }
 
 
     // TODO test failed?

@@ -2,6 +2,11 @@
 
 dependencies {
   implementation(projects.common)
+  // http client
   implementation(libs.logback)
   implementation(libs.vertx.web.client)
+  // inject
+  implementation(libs.avaje.inject)
+  annotationProcessor(libs.avaje.inject.generator)
+  testImplementation(libs.avaje.inject.test)
 }

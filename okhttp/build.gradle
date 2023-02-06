@@ -1,7 +1,13 @@
 dependencies {
   implementation(projects.common)
+  // log
   implementation(libs.logback)
   implementation(libs.okhttp.logging)
+  // http client
   implementation(libs.retrofit)
   implementation(libs.retrofit.converter.jackson)
+  // inject
+  implementation(libs.avaje.inject)
+  annotationProcessor(libs.avaje.inject.generator)
+  testImplementation(libs.avaje.inject.test)
 }

@@ -13,11 +13,13 @@ import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.ext.web.client.predicate.ResponsePredicate;
 import io.vertx.ext.web.codec.BodyCodec;
 import io.vertx.uritemplate.UriTemplate;
+import jakarta.inject.Singleton;
 
 import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
 
+@Singleton
 public class MailClientImpl implements MailClient {
 
     private final WebClient webClient;

@@ -1,36 +1,20 @@
 package avaje;
 
 import common.file.FileClient;
-import io.avaje.http.client.HttpClient;
-import io.avaje.http.client.JacksonBodyAdapter;
-import org.junit.jupiter.api.BeforeAll;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@InjectTest
 class FileClientExtTest {
 
+    @Inject
     private static FileClient fileClient;
-
-    @BeforeAll
-    static void setup() {
-
-        var proxySelector = ProxySelector.of((InetSocketAddress) FileClient.proxy.address());
-
-        var httpClient = HttpClient.builder()
-            .proxy(proxySelector)
-            .baseUrl(FileClient.addr.toString())
-            .bodyAdapter(new JacksonBodyAdapter())
-            .build();
-
-        fileClient = httpClient.create(FileClientExt.class);
-    }
-
 
     // TODO avaje does not support multipart now
     @Test

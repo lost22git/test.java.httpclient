@@ -1,34 +1,23 @@
 package okhttp;
 
 import common.mail.MailClient;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@InjectTest
 class MailClientExtTest {
 
+    @Inject
     private static MailClient mailClient;
 
     private static String mail;
 
     @BeforeAll
     static void setup() {
-        var httpClient = new OkHttpClient.Builder()
-//            .proxy(FileClient.proxy)
-            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build();
-        var retrofit = new Retrofit.Builder()
-            .baseUrl(MailClient.addr.toString())
-            .addConverterFactory(JacksonConverterFactory.create())
-            .client(httpClient)
-            .build();
-
-        mailClient = retrofit.create(MailClientExt.class);
         mail = "ok@end.tw";
     }
 

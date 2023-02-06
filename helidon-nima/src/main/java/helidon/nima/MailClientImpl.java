@@ -6,11 +6,13 @@ import common.mail.MailMsg;
 import common.mail.MailMsgDetails;
 import io.helidon.common.http.Http;
 import io.helidon.nima.webclient.http1.Http1Client;
+import jakarta.inject.Singleton;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@Singleton
 public class MailClientImpl implements MailClient {
 
     private final Http1Client httpClient;

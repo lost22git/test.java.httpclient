@@ -1,31 +1,22 @@
 package avaje;
 
 import common.mail.MailClient;
-import io.avaje.http.client.HttpClient;
-import io.avaje.http.client.JacksonBodyAdapter;
+import io.avaje.inject.test.InjectTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@InjectTest
 class MailClientExtTest {
 
+    @Inject
     private static MailClient mailClient;
     private static String mail;
 
     @BeforeAll
     static void setup() {
-        var proxySelector = ProxySelector.of((InetSocketAddress) MailClient.proxy.address());
-        var httpclient = HttpClient.builder()
-            .baseUrl(MailClient.addr.toString())
-//            .proxy(proxySelector)
-            .bodyAdapter(new JacksonBodyAdapter())
-            .build();
-
-        mailClient = httpclient.create(MailClientExt.class);
         mail = "avaje@end.tw";
     }
 
