@@ -11,6 +11,8 @@ import io.helidon.nima.webclient.http1.Http1Client;
 import jakarta.inject.Singleton;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.util.Optional;
 
 @Singleton
 public class FileClientImpl implements FileClient {
@@ -19,7 +21,7 @@ public class FileClientImpl implements FileClient {
 
     public FileClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(addr + ":443")
+            .baseUri(api_addr + ":443")
             .build();
     }
 
@@ -45,5 +47,23 @@ public class FileClientImpl implements FileClient {
         return httpClient.get("/v2/file/{id}/info")
             .pathParam("id", id)
             .request(InfoResponse.class);
+    }
+
+    @Override
+    public Optional<URI> get_download_uri(String id) {
+        var uri = FileClient.resolve(id);
+        var html = httpClient
+            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
+            .request()
+            .as(String.class);
+        return FileClient.parse_download_uri(html);
+    }
+
+    @Override
+    public InputStream download(URI uri) {
+        return httpClient
+            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
+            .request()
+            .inputStream();
     }
 }

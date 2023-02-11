@@ -19,7 +19,7 @@ public class ClientFactory {
             .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
         var retrofit = new Retrofit.Builder()
-            .baseUrl(FileClient.addr.toString())
+            .baseUrl(FileClient.api_addr.toString())
             .addConverterFactory(JacksonConverterFactory.create())
             .client(httpClient)
             .build();

@@ -19,7 +19,7 @@ public class ClientFactory {
 
         var httpClient = HttpClient.builder()
             .proxy(proxySelector)
-            .baseUrl(FileClient.addr.toString())
+            .baseUrl(FileClient.api_addr.toString())
             .bodyAdapter(new JacksonBodyAdapter())
             .build();
 

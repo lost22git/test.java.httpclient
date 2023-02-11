@@ -3,6 +3,7 @@ package vertx;
 import common.file.FileClient;
 import common.file.InfoResponse;
 import common.file.UploadResponse;
+import io.netty.buffer.ByteBufInputStream;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.ProxyOptions;
@@ -18,6 +19,8 @@ import jakarta.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.util.Optional;
 
 @Singleton
 public class FileClientImpl implements FileClient {
@@ -29,7 +32,7 @@ public class FileClientImpl implements FileClient {
             .setPort(((InetSocketAddress) proxy.address()).getPort())
             .setType(ProxyType.SOCKS5);
         var options = new WebClientOptions()
-            .setDefaultHost(addr.getHost())
+            .setDefaultHost(api_addr.getHost())
 //            .setSsl(true)
 //            .setVerifyHost(false)
             .setLogActivity(true)
@@ -67,5 +70,32 @@ public class FileClientImpl implements FileClient {
             .toCompletableFuture()
             .join()
             .body();
+    }
+
+    @Override
+    public Optional<URI> get_download_uri(String id) {
+        var uri = FileClient.resolve(id);
+        var html = webClient.getAbs(uri.toString())
+            .expect(ResponsePredicate.status(200, 300))
+            .send()
+            .toCompletionStage()
+            .toCompletableFuture()
+            .join()
+            .bodyAsString();
+        return FileClient.parse_download_uri(html);
+    }
+
+    @Override
+    public InputStream download(URI uri) {
+        var buffer = webClient.getAbs(uri.toString())
+            .expect(ResponsePredicate.status(200, 300))
+            .send()
+            .toCompletionStage()
+            .toCompletableFuture()
+            .join()
+            .body();
+
+        // vertx Buffer -> netty ByteBuf -> java InputStream
+        return new ByteBufInputStream(buffer.getByteBuf());
     }
 }

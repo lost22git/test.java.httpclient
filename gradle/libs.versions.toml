@@ -26,6 +26,9 @@ helidon = "4.0.0-ALPHA4"
 retrofit = "2.9.0"
 okhttp-logging = "4.10.0"
 
+# jsoup
+jsoup = "1.15.3"
+
 ####################### Plugins version
 plugin-taskinfo = "1.4.0"
 plugin-goJF = "0.9"
@@ -147,6 +150,11 @@ version.ref = "retrofit"
 [libraries.okhttp-logging]
 module = "com.squareup.okhttp3:logging-interceptor"
 version.ref = "okhttp-logging"
+
+# jsoup
+[libraries.jsoup]
+module = "org.jsoup:jsoup"
+version.ref = "jsoup"
 
 ####################### Plugins
 [plugins.taskinfo]

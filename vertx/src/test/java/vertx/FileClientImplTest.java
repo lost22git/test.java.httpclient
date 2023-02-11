@@ -32,11 +32,34 @@ class FileClientImplTest {
 
     @Test
     void info() {
-        var id = "WeZdKcVeyb";
+        var id = "Cfl4xbXcyb";
         var infoResponse = fileClient.info(id);
         assertTrue(infoResponse.status());
         assertNotNull(infoResponse.data());
         assertNotNull(infoResponse.data().file().url());
         System.out.println("infoResponse = " + infoResponse);
+    }
+
+    @Test
+    void get_download_uri() {
+        var id = "Cfl4xbXcyb";
+        var downloadUri = fileClient.get_download_uri(id);
+
+        assertTrue(downloadUri.isPresent());
+    }
+
+    @Test
+    void download() throws IOException {
+        var id = "Cfl4xbXcyb";
+        var downloadUri = fileClient.get_download_uri(id);
+
+        assertTrue(downloadUri.isPresent());
+
+        var inputStream = fileClient.download(downloadUri.get());
+        var bytes = inputStream.readAllBytes();
+        inputStream.close();
+
+        assertTrue(bytes.length > 0);
+
     }
 }
