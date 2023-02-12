@@ -4,8 +4,6 @@ import common.file.FileClient;
 import common.mail.MailClient;
 import io.avaje.inject.Bean;
 import io.avaje.inject.Factory;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -14,10 +12,7 @@ public class ClientFactory {
 
     @Bean
     FileClient fileClient() {
-        var httpClient = new OkHttpClient.Builder()
-            .proxy(FileClient.proxy)
-            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build();
+        var httpClient = FileClientExt.inner_client.get();
         var retrofit = new Retrofit.Builder()
             .baseUrl(FileClient.api_addr.toString())
             .addConverterFactory(JacksonConverterFactory.create())
@@ -29,10 +24,7 @@ public class ClientFactory {
 
     @Bean
     MailClient mailClient() {
-        var httpClient = new OkHttpClient.Builder()
-//            .proxy(FileClient.proxy)
-            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build();
+        var httpClient = MailClientExt.inner_client.get();
         var retrofit = new Retrofit.Builder()
             .baseUrl(MailClient.addr.toString())
             .addConverterFactory(JacksonConverterFactory.create())

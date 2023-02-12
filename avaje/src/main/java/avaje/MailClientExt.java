@@ -3,16 +3,29 @@ package avaje;
 import common.mail.MailClient;
 import common.mail.MailMsg;
 import common.mail.MailMsgDetails;
+import common.util.LazyValue;
 import io.avaje.http.api.Client;
 import io.avaje.http.api.Get;
 import io.avaje.http.api.Header;
+import io.avaje.http.client.HttpClient;
+import io.avaje.http.client.JacksonBodyAdapter;
 
+import java.net.InetSocketAddress;
+import java.net.ProxySelector;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 
 @Client
 public interface MailClientExt extends MailClient {
+    LazyValue<HttpClient> inner_client = LazyValue.create(() -> {
+        var proxySelector = ProxySelector.of((InetSocketAddress) MailClient.proxy.address());
+        return HttpClient.builder()
+            .baseUrl(MailClient.addr.toString())
+//            .proxy(proxySelector)
+            .bodyAdapter(new JacksonBodyAdapter())
+            .build();
+    });
 
     default String get_auth_token(String mail) {
         var res = get_auth_token_0(mail);

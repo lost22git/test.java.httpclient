@@ -3,6 +3,9 @@ package okhttp;
 import common.mail.MailClient;
 import common.mail.MailMsg;
 import common.mail.MailMsgDetails;
+import common.util.LazyValue;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;
@@ -14,6 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface MailClientExt extends MailClient {
+
+    LazyValue<OkHttpClient> inner_client = LazyValue.create(() -> {
+        return new OkHttpClient.Builder()
+//            .proxy(FileClient.proxy)
+            .addInterceptor(HttpLog.INSTANCE.createInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build();
+    });
 
     @Override
     default String get_auth_token(String mail) {

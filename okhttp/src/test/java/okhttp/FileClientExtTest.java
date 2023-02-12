@@ -3,7 +3,6 @@ package okhttp;
 import common.file.FileClient;
 import io.avaje.inject.test.InjectTest;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -16,11 +15,6 @@ class FileClientExtTest {
 
     @Inject
     private static FileClient fileClient;
-
-    @BeforeAll
-    static void setup() {
-
-    }
 
     @Test
     void upload() throws IOException {
