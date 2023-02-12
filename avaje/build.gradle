@@ -1,5 +1,6 @@
 dependencies {
   implementation(projects.common)
+  testImplementation(projects.common.dependencyProject.sourceSets.test.output)
   // log
   implementation(libs.logback)
   implementation(libs.avaje.slf4j.jpl)

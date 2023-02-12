@@ -1,5 +1,6 @@
 dependencies {
   implementation(projects.common)
+  testImplementation(projects.common.dependencyProject.sourceSets.test.output)
   // http client
   implementation(libs.logback)
   implementation(libs.vertx.web.client)
