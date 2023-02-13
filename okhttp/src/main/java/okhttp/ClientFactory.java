@@ -26,7 +26,7 @@ public class ClientFactory {
     MailClient mailClient() {
         var httpClient = MailClientExt.inner_client.get();
         var retrofit = new Retrofit.Builder()
-            .baseUrl(MailClient.addr.toString())
+            .baseUrl(MailClient.api_addr.toString())
             .addConverterFactory(JacksonConverterFactory.create())
             .client(httpClient)
             .build();

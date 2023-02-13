@@ -31,7 +31,7 @@ public class MailClientImpl implements MailClient {
             .setType(ProxyType.SOCKS5);
 
         var options = new WebClientOptions()
-            .setDefaultHost(addr.getHost())
+            .setDefaultHost(api_addr.getHost())
 //            .setProxyOptions(proxyOptions)
             ;
         this.webClient = WebClient.create(vertx, options);

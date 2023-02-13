@@ -39,6 +39,7 @@ public abstract class FileClientTestBase {
         var downloadUri = fileClient().get_download_uri(id);
 
         assertTrue(downloadUri.isPresent());
+        System.out.println("downloadUri = " + downloadUri);
     }
 
     protected void download() throws IOException {
@@ -47,12 +48,10 @@ public abstract class FileClientTestBase {
 
         assertTrue(downloadUri.isPresent());
 
-        var inputStream = fileClient().download(downloadUri.get());
-        var bytes = inputStream.readAllBytes();
-        inputStream.close();
-
-        assertTrue(bytes.length > 0);
-
+        try (var inputStream = fileClient().download(downloadUri.get())) {
+            var bytes = inputStream.readAllBytes();
+            assertTrue(bytes.length > 0);
+        }
     }
 
 }

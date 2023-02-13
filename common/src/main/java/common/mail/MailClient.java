@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MailClient {
 
-    URI addr = URI.create("https://mail.td");
+    URI api_addr = URI.create("https://mail.td");
     Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", 55556));
 
     String get_auth_token(String mail);

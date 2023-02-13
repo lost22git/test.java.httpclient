@@ -19,7 +19,7 @@ public class MailClientImpl implements MailClient {
 
     public MailClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(addr + ":443")
+            .baseUri(api_addr + ":443")
             .build();
     }
 

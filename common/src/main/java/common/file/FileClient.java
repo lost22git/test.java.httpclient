@@ -34,5 +34,5 @@ public interface FileClient {
 
     Optional<URI> get_download_uri(String id);
 
-    InputStream download(URI uri);
+    InputStream download(URI uri) throws IOException;
 }

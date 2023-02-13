@@ -21,7 +21,7 @@ public interface MailClientExt extends MailClient {
     LazyValue<HttpClient> inner_client = LazyValue.create(() -> {
         var proxySelector = ProxySelector.of((InetSocketAddress) MailClient.proxy.address());
         return HttpClient.builder()
-            .baseUrl(MailClient.addr.toString())
+            .baseUrl(MailClient.api_addr.toString())
 //            .proxy(proxySelector)
             .bodyAdapter(new JacksonBodyAdapter())
             .build();

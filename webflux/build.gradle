@@ -1,0 +1,16 @@
+plugins {
+  id("java-library")
+}
+
+dependencies {
+  implementation(projects.common)
+  testImplementation(projects.common.dependencyProject.sourceSets.test.output)
+  // log
+  implementation(libs.logback)
+  // http client
+  implementation(libs.webflux)
+  // inject
+  implementation(libs.avaje.inject)
+  annotationProcessor(libs.avaje.inject.generator)
+  testImplementation(libs.avaje.inject.test)
+}
