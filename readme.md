@@ -4,3 +4,4 @@
 | helidon-nima-http-client |       |  x  |      x      |      x       |       x        |                    |       |         |
 | okhttp                   |   x   |  x  |      x      |      x       |       x        |                    |   x   |    x    |
 | vertx-web-client         |   x   |  x  |      x      |      x       |       x        |         x          |   x   |    x    |
+| webflux | x | x | x | x | x | x | x | x |
