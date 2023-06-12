@@ -21,7 +21,7 @@ public class FileClientImpl implements FileClient {
 
     public FileClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(api_addr + ":443")
+            .baseUri(api_addr)
             .build();
     }
 
@@ -31,7 +31,7 @@ public class FileClientImpl implements FileClient {
             .addPart(WriteablePart.builder("file")
                 .fileName("test.png")
                 .contentType(HttpMediaType.create("image/png"))
-                .inputStream(() -> inputStream)
+                .content(() -> inputStream)
                 .build()
             )
             .build();
@@ -53,7 +53,8 @@ public class FileClientImpl implements FileClient {
     public Optional<URI> get_download_uri(String id) {
         var uri = FileClient.resolve(id);
         var html = httpClient
-            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
+            .get(uri.toString())
+//            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
             .request()
             .as(String.class);
         return FileClient.parse_download_uri(html);
@@ -62,7 +63,8 @@ public class FileClientImpl implements FileClient {
     @Override
     public InputStream download(URI uri) {
         return httpClient
-            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
+//            .get(uri.getScheme() + "://" + uri.getHost() + ":443" + "/" + uri.getPath())
+            .get(uri.toString())
             .request()
             .inputStream();
     }

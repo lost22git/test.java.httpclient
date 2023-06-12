@@ -1,192 +1,87 @@
 [versions]
-####################### Libraries version
-jetbrains-annotations = "23.0.0"
-slf4j = "2.0.0"
-logback = "1.4.5"
-logstash-logback-encoder = "7.2"
-junit = "5.9.0"
-jmh = "1.35"
-assertj = "3.23.1"
+assertj = "3.24.2"
+avaje-http-client = "1.41"
+avaje-inject = "9.3-RC1"
+avaje-slf4j-jpl = "1.2"
 awaitility = "4.2.0"
 easyrandom = "5.0.0"
-jackson = "2.13.4"
-
-# avaje-inject
-avaje-inject = "8.11"
-
-# avaje-httpclient
-avaje-http-client = "1.24"
-avaje-slf4j-jpl = "1.2"
-# vertx
-vertx = "4.3.7"
-# helidon
-helidon = "4.0.0-ALPHA4"
-
-# okhttp
-retrofit = "2.9.0"
-okhttp-logging = "4.10.0"
-
-# webflux
-webflux = "3.0.2"
-
-# jsoup
-jsoup = "1.15.3"
-
-####################### Plugins version
-plugin-taskinfo = "1.4.0"
+helidon = "4.0.0-ALPHA6"
+jackson = "2.15.2"
+jetbrains-annotations = "24.0.1"
+jmh = "1.35"
+jsoup = "1.16.1"
+junit = "5.10.0-M1"
+logback = "1.4.7"
+logstash-logback-encoder = "7.2"
+okhttp-logging = "5.0.0-alpha.11"
 plugin-goJF = "0.9"
+plugin-jcstress = "0.8.11"
 plugin-jmh = "0.6.6"
 plugin-jmhReport = "0.9.0"
-plugin-jcstress = "0.8.11"
 plugin-shadow = "7.1.2"
+plugin-taskinfo = "1.4.0"
+plugin-version-catalog-update = "0.8.0"
+plugin-versions = "0.46.0"
+retrofit = "2.9.0"
+slf4j = "2.0.7"
+unirest = "3.14.1"
+vertx = "4.4.2"
+webflux = "3.1.0"
 
+[libraries]
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+avaje-http-api = { module = "io.avaje:avaje-http-api", version.ref = "avaje-http-client" }
+avaje-http-client = { module = "io.avaje:avaje-http-client", version.ref = "avaje-http-client" }
+avaje-http-client-generator = { module = "io.avaje:avaje-http-client-generator", version.ref = "avaje-http-client" }
+avaje-inject = { module = "io.avaje:avaje-inject", version.ref = "avaje-inject" }
+avaje-inject-generator = { module = "io.avaje:avaje-inject-generator", version.ref = "avaje-inject" }
+avaje-inject-test = { module = "io.avaje:avaje-inject-test", version.ref = "avaje-inject" }
+avaje-slf4j-jpl = { module = "io.avaje:avaje-slf4j-jpl", version.ref = "avaje-slf4j-jpl" }
+awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
+easyrandom-core = { module = "org.jeasy:easy-random-core", version.ref = "easyrandom" }
+helidon-nima-http-media-multipart = { module = "io.helidon.nima.http.media:helidon-nima-http-media-multipart", version.ref = "helidon" }
+helidon-nima-http-media-jackson = { module = "io.helidon.nima.http.media:helidon-nima-http-media-jackson", version.ref = "helidon" }
+helidon-nima-webclient = { module = "io.helidon.nima.webclient:helidon-nima-webclient", version.ref = "helidon" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+jmh-core = { module = "org.openjdk.jmh:jmh-core", version.ref = "jmh" }
+jmh-generator-annprocess = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmh" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback-encoder" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp-logging" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-jackson = { module = "com.squareup.retrofit2:converter-jackson", version.ref = "retrofit" }
+slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+unirest = { module = "com.konghq:unirest-java", version.ref = "unirest" }
+vertx-web-client = { module = "io.vertx:vertx-web-client", version.ref = "vertx" }
+webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "webflux" }
 
-####################### Bundles
 [bundles]
-junit = ["junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"]
-jmh = ["jmh-core", "jmh-generator-annprocess"]
-jackson = ["jackson-annotations", "jackson-jsr310"]
+jackson = [
+  "jackson-annotations",
+  "jackson-jsr310",
+]
+jmh = [
+  "jmh-core",
+  "jmh-generator-annprocess",
+]
+junit = [
+  "junit-jupiter-api",
+  "junit-jupiter-engine",
+  "junit-jupiter-params",
+]
 
-
-####################### Libraries
-[libraries.jetbrains-annotations]
-module = "org.jetbrains:annotations"
-version.ref = "jetbrains-annotations"
-
-[libraries.slf4j]
-module = "org.slf4j:slf4j-api"
-version.ref = "slf4j"
-
-[libraries.logback]
-module = "ch.qos.logback:logback-classic"
-version.ref = "logback"
-
-[libraries.logstash-logback-encoder]
-module = "net.logstash.logback:logstash-logback-encoder"
-version.ref = "logstash-logback-encoder"
-
-[libraries.junit-jupiter-api]
-module = "org.junit.jupiter:junit-jupiter-api"
-version.ref = "junit"
-
-[libraries.junit-jupiter-engine]
-module = "org.junit.jupiter:junit-jupiter-engine"
-version.ref = "junit"
-
-[libraries.junit-jupiter-params]
-module = "org.junit.jupiter:junit-jupiter-params"
-version.ref = "junit"
-
-[libraries.jmh-core]
-module = "org.openjdk.jmh:jmh-core"
-version.ref = "jmh"
-
-[libraries.jmh-generator-annprocess]
-module = "org.openjdk.jmh:jmh-generator-annprocess"
-version.ref = "jmh"
-
-[libraries.assertj]
-module = "org.assertj:assertj-core"
-version.ref = "assertj"
-
-[libraries.awaitility]
-module = "org.awaitility:awaitility"
-version.ref = "awaitility"
-
-[libraries.easyrandom-core]
-module = "org.jeasy:easy-random-core"
-version.ref = "easyrandom"
-
-[libraries.jackson-annotations]
-module = "com.fasterxml.jackson.core:jackson-annotations"
-version.ref = "jackson"
-
-[libraries.jackson-jsr310]
-module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-version.ref = "jackson"
-
-# avaje-inject
-[libraries.avaje-inject]
-module = "io.avaje:avaje-inject"
-version.ref = "avaje-inject"
-[libraries.avaje-inject-generator]
-module = "io.avaje:avaje-inject-generator"
-version.ref = "avaje-inject"
-[libraries.avaje-inject-test]
-module = "io.avaje:avaje-inject-test"
-version.ref = "avaje-inject"
-
-# avaje-htto-client
-[libraries.avaje-http-client]
-module = "io.avaje:avaje-http-client"
-version.ref = "avaje-http-client"
-[libraries.avaje-http-api]
-module = "io.avaje:avaje-http-api"
-version.ref = "avaje-http-client"
-[libraries.avaje-http-client-generator]
-module = "io.avaje:avaje-http-client-generator"
-version.ref = "avaje-http-client"
-[libraries.avaje-slf4j-jpl]
-module = "io.avaje:avaje-slf4j-jpl"
-version.ref = "avaje-slf4j-jpl"
-
-# vetx
-[libraries.vertx-web-client]
-module = "io.vertx:vertx-web-client"
-version.ref = "vertx"
-
-# helidon
-[libraries.helidon-nima-webclient]
-module = "io.helidon.nima.webclient:helidon-nima-webclient"
-version.ref = "helidon"
-[libraries.helidon-nima-http-media-multipart]
-module = "io.helidon.nima.http.media:helidon-nima-http-media-multipart"
-version.ref = "helidon"
-
-# okhttp
-[libraries.retrofit]
-module = "com.squareup.retrofit2:retrofit"
-version.ref = "retrofit"
-[libraries.retrofit-converter-jackson]
-module = "com.squareup.retrofit2:converter-jackson"
-version.ref = "retrofit"
-[libraries.okhttp-logging]
-module = "com.squareup.okhttp3:logging-interceptor"
-version.ref = "okhttp-logging"
-
-# webflux
-[libraries.webflux]
-module = "org.springframework.boot:spring-boot-starter-webflux"
-version.ref = "webflux"
-
-# jsoup
-[libraries.jsoup]
-module = "org.jsoup:jsoup"
-version.ref = "jsoup"
-
-####################### Plugins
-[plugins.taskinfo]
-id = "org.barfuin.gradle.taskinfo"
-version.ref = "plugin-taskinfo"
-
-[plugins.goJF]
-id = "com.github.sherter.google-java-format"
-version.ref = "plugin-goJF"
-
-[plugins.jmh]
-id = "me.champeau.jmh"
-version.ref = "plugin-jmh"
-
-[plugins.jmhReport]
-id = "io.morethan.jmhreport"
-version.ref = "plugin-jmhReport"
-
-[plugins.jcstress]
-id = "io.github.reyerizo.gradle.jcstress"
-version.ref = "plugin-jcstress"
-
-[plugins.shadow]
-id = "com.github.johnrengelman.shadow"
-version.ref = "plugin-shadow"
-
-[metadata]
+[plugins]
+goJF = { id = "com.github.sherter.google-java-format", version.ref = "plugin-goJF" }
+jcstress = { id = "io.github.reyerizo.gradle.jcstress", version.ref = "plugin-jcstress" }
+jmh = { id = "me.champeau.jmh", version.ref = "plugin-jmh" }
+jmhReport = { id = "io.morethan.jmhreport", version.ref = "plugin-jmhReport" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "plugin-shadow" }
+taskinfo = { id = "org.barfuin.gradle.taskinfo", version.ref = "plugin-taskinfo" }
+version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "plugin-version-catalog-update" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "plugin-versions" }

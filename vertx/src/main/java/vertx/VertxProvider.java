@@ -7,9 +7,8 @@ import jakarta.inject.Singleton;
 @Singleton
 public class VertxProvider implements Provider<Vertx> {
 
-    volatile Vertx vertx;
-
     private static final Object LOCK = new Object();
+    volatile Vertx vertx;
 
     @Override
     public Vertx get() {

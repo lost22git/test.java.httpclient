@@ -1,5 +1,6 @@
 plugins {
-  id("groovy")
+  alias(libs.plugins.versions)
+  alias(libs.plugins.version.catalog.update)
 }
 
 
@@ -17,12 +18,12 @@ allprojects {
 subprojects {
 
   apply {
-    plugin("groovy")
+    plugin("java")
   }
 
   java {
-    sourceCompatibility = JavaVersion.VERSION_19
-    targetCompatibility = JavaVersion.VERSION_19
+    sourceCompatibility = JavaVersion.VERSION_20
+    targetCompatibility = JavaVersion.VERSION_20
   }
 
   dependencies {
@@ -39,16 +40,26 @@ subprojects {
     testImplementation(libs.easyrandom.core)
   }
 
-
-  // ------ Tasks
-  tasks.compileJava {
+  tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
-    options.compilerArgs.add("-parameters")
-    // use the project's version or define one directly
-    options.javaModuleVersion = provider { project.version }
-  }
-  tasks.test {
-    useJUnitPlatform()
+    options.compilerArgs += [
+      "-parameters",
+      "--enable-preview"
+    ]
   }
 
+  tasks.withType(JavaExec).configureEach {
+    jvmArgs = [
+      "--enable-preview"
+    ]
+  }
+
+  tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    jvmArgs = [
+      "--enable-preview"
+    ]
+  }
 }
+
+apply from: "./gradle_scripts/version_catalog_update.gradle"

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public record MailMsg(
     String id,
     String from,
+
     @JsonProperty("mailbox")
     String to,
 

@@ -1,15 +1,13 @@
 package helidon.nima;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import common.mail.MailClient;
 import common.mail.MailMsg;
 import common.mail.MailMsgDetails;
+import io.helidon.common.GenericType;
 import io.helidon.common.http.Http;
 import io.helidon.nima.webclient.http1.Http1Client;
 import jakarta.inject.Singleton;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @Singleton
@@ -19,7 +17,7 @@ public class MailClientImpl implements MailClient {
 
     public MailClientImpl() {
         httpClient = Http1Client.builder()
-            .baseUri(api_addr + ":443")
+            .baseUri(api_addr)
             .build();
     }
 
@@ -29,14 +27,8 @@ public class MailClientImpl implements MailClient {
             .pathParam("mail", mail)
             .request();
 
-        return res.headers().values(Http.Header.create("set-cookie"))
-            .stream()
-            .filter(v -> v.contains("auth_token="))
-            .flatMap(v -> Arrays.stream(v.split(";")))
-            .filter(v -> v.startsWith("auth_token="))
-            .map(v -> v.substring("auth_token=".length()).trim())
-            .findFirst()
-            .orElse(null);
+        var cookieValues = res.headers().values(Http.Header.create("set-cookie"));
+        return parse_auth_token_from_cookie(cookieValues.stream());
     }
 
     @Override
@@ -49,14 +41,8 @@ public class MailClientImpl implements MailClient {
             .header(Http.Header.create("authorization"), token)
             .header(Http.Header.create("referer"), referer)
             .request();
-
-        var stream = res.entity().inputStream();
-        try {
-            return JacksonSupportProvider.JSON.readValue(stream, new TypeReference<>() {
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return res.entity().as(new GenericType<>() {
+        });
     }
 
     @Override

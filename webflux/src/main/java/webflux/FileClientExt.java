@@ -6,16 +6,15 @@ import common.file.UploadResponse;
 import common.util.LazyValue;
 import io.netty.handler.logging.LogLevel;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.service.annotation.GetExchange;
-import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.scheduler.Schedulers;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.logging.AdvancedByteBufFormat;
@@ -43,20 +42,19 @@ public interface FileClientExt extends FileClient {
     default UploadResponse upload(InputStream inputStream) throws IOException {
         var resource = new InputStreamResource(inputStream);
 
-//        var multipartBodyBuilder = new MultipartBodyBuilder();
-//        multipartBodyBuilder
-//            .part("file", resource, MediaType.IMAGE_PNG).filename("test.png");
-//        var multipartBody = multipartBodyBuilder.build();
-//
-//        return inner_client.get().post()
-//            .uri("/upload")
-//            .contentType(MediaType.MULTIPART_FORM_DATA)
-//            .body(BodyInserters.fromMultipartData(multipartBody))
-//            .retrieve()
-//            .bodyToMono(UploadResponse.class)
-//            .block();
+        var multipartBodyBuilder = new MultipartBodyBuilder();
+        multipartBodyBuilder
+            .part("file", resource, MediaType.IMAGE_PNG).filename("test.png");
+        var multipartBody = multipartBodyBuilder.build();
+        return inner_client.get().post()
+            .uri("/upload")
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+            .body(BodyInserters.fromMultipartData(multipartBody))
+            .retrieve()
+            .bodyToMono(UploadResponse.class)
+            .block();
 
-        return upload(resource);
+//            return upload(resource);
     }
 
     @Override
@@ -97,7 +95,7 @@ public interface FileClientExt extends FileClient {
     @GetExchange("/v2/file/{id}/info")
     InfoResponse info(@PathVariable("id") String id);
 
-    @PostExchange(value = "/upload", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
-    UploadResponse upload(@RequestPart("file")
-                          Resource file);
+//    @PostExchange(value = "/upload", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    UploadResponse upload(@RequestPart("file")
+//                          InputStreamResource file);
 }
