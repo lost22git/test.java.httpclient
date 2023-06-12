@@ -3,7 +3,7 @@ package unirest;
 import common.file.FileClient;
 import common.file.FileClientTestBase;
 import io.avaje.inject.test.InjectTest;
-import jakarta.inject.Inject; x | x |
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

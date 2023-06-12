@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class FileClientTestBase {
 
+    static String file_id = "g9b51bwezd";
+
     protected abstract FileClient fileClient();
 
     protected void upload() throws IOException {
@@ -23,9 +25,7 @@ public abstract class FileClientTestBase {
 
 
     protected void info() {
-        var id = "Cfl4xbXcyb";
-
-        var infoResponse = fileClient().info(id);
+        var infoResponse = fileClient().info(file_id);
 
         assertNotNull(infoResponse);
         assertTrue(infoResponse.status());
@@ -35,16 +35,14 @@ public abstract class FileClientTestBase {
     }
 
     protected void get_download_uri() {
-        var id = "Cfl4xbXcyb";
-        var downloadUri = fileClient().get_download_uri(id);
+        var downloadUri = fileClient().get_download_uri(file_id);
 
         assertTrue(downloadUri.isPresent());
         System.out.println("downloadUri = " + downloadUri);
     }
 
     protected void download() throws IOException {
-        var id = "Cfl4xbXcyb";
-        var downloadUri = fileClient().get_download_uri(id);
+        var downloadUri = fileClient().get_download_uri(file_id);
 
         assertTrue(downloadUri.isPresent());
 
